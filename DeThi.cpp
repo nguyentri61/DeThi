@@ -137,14 +137,14 @@ public:
 		{
 			
 			DisplayQ(q->data);
-			string chon;
-			while(chon !="A" && chon !="B"&& chon !="C"&& chon !="D"){
-				cout<<"Nhap dap an: ";
-				cin>>chon;
-			}
-			if(chon==q->data.dapan)
-				total+=diem;
-			system("cls"); 
+//			string chon;
+//			while(chon !="A" && chon !="B"&& chon !="C"&& chon !="D"){
+//				cout<<"Nhap dap an: ";
+//				cin>>chon;
+//			}
+//			if(chon==q->data.dapan)
+//				total+=diem;
+//			system("cls"); 
 			q=q->next;
 		}
 		cout<<"Score: "<<total;
