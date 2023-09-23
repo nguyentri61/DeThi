@@ -43,27 +43,31 @@ class DeThi
 {	
 private:
 	LinkedList l;
+	int socau;
 public:
 	DeThi()
 	{
 		l.head=NULL;
 		l.tail=NULL;
+		socau=0;
 	}
 	void Display()
 	{
+		float diem=10/socau,total=0;
 		Node* q=l.head;
 		while(q!=NULL)
 		{
+			
 			DisplayQ(q->data);
-//			char chon;
-//			cout<<"Nhap dap an: ";
-//			cin>>chon;
-//			if(chon==q->data.dapan[0])
-//				cout<<"Dung";
-//			else 
-//				cout<<"Sai";
+			char chon;
+			cout<<"Nhap dap an: ";
+			cin>>chon;
+			if(chon==q->data.dapan[0])
+				total+=diem;
+			system("cls"); 
 			q=q->next;
 		}
+		cout<<total;
 	}		
 	void AddTail(Node* node)
 	{	
@@ -96,7 +100,6 @@ public:
 			getline(ip, x4);
 			getline(ip, x5);
 			getline(ip, x6);
-//			cout << x1 << "\n";
 			Node* node=CreateNode(InitQ(x1, x2, x3, x4, x5, x6));
 			if(l.head==NULL)
 			{
@@ -108,6 +111,7 @@ public:
 				l.tail->next=node;
 				l.tail = node;
 			}
+			socau++;
 			if(ip.eof())
 				break;	
 		}
