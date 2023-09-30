@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 struct CauHoi
 {
@@ -92,7 +92,7 @@ void Remove(LinkedList& l,int x)
 		Node* q =l.head;
 		while(q->next!=NULL && q->next->data.stt != x)
 			q=q->next;
-			RemoveAfterQ(l,q);
+		RemoveAfterQ(l,q);
 		q=q->next;
 		while(q!=NULL)
 		{
@@ -123,7 +123,7 @@ public:
 		Node* q=l.head;
 		while(q!=NULL)
 		{			
-			DisplayQ(q->data);
+			DisplayQ(q->data);			
 			q=q->next;
 		}
 		
@@ -131,34 +131,43 @@ public:
 	void Test()
 	{
 		system("cls");
-		float diem=10/socau,total=0;
+		float diem=(float)10/socau,total=0;
+		if(socau==0)
+		{
+			cout<<"Chua co de thi\n";
+			return;
+		}
 		Node* q=l.head;
 		while(q!=NULL)
 		{
 			
 			DisplayQ(q->data);
-//			string chon;
-//			while(chon !="A" && chon !="B"&& chon !="C"&& chon !="D"){
-//				cout<<"Nhap dap an: ";
-//				cin>>chon;
-//			}
-//			if(chon==q->data.dapan)
-//				total+=diem;
-//			system("cls"); 
+			string chon;
+			while(chon !="A" && chon !="B"&& chon !="C"&& chon !="D"){
+				cout<<"Nhap dap an: ";
+				cin>>chon;
+			}
+			if(chon==q->data.dapan)
+				total+=diem;
+			system("cls"); 
 			q=q->next;
 		}
-		cout<<"Score: "<<total;
+		cout<<"Score: "<<total << endl;
 	}	
 	void docFile()
 	{
-		fstream ip("DeThi.txt", ios::in);
+		fstream ip("Bo.txt", ios::in);
 		if(ip.fail())
 		{
 			cout << "Khong the mo file";
 			exit(0);
 		}
 		
-		while(true)
+		int cnt;
+		cout << "Nhap so cau hoi muon thuc hien: ";
+		cin >> cnt;
+		
+		while(socau < cnt)
 		{
 			string x1, x2, x3, x4, x5, x6;
 			getline(ip, x1);
@@ -189,6 +198,11 @@ public:
 	}
 	void XoaCauHoi(){
 		//Display();
+		if(socau==0)
+		{
+			cout<<"Chua co de thi\n";
+			return;
+		}
 		cout<<"Nhap cau hoi can xoa: ";
 		int x;
 		cin>>x;
@@ -200,7 +214,8 @@ public:
 	{
 		cout << "Nhap cau hoi muon them: \n";
 		string x1, x2, x3, x4, x5, x6;
-		cout << "Nhap cau hoi: "; 
+		cout << "Nhap cau hoi: ";
+		fflush(stdin); 
 		getline(cin, x1);
 		cout << "Nhap cau tra loi: "; 
 		getline(cin, x2);
@@ -213,16 +228,82 @@ public:
 		socau++;
 		node->data.stt=socau;
 		AddTail(l,node);
+	}
+	void StartMenu()
+	{
+		while(true)
+		{
+			cout<<"--------Mo Hinh Quan Ly De Thi--------\n";
+			int Case;			
+			cout<<"1. Nhap de thi tu file\n";
+			cout<<"2. Thuc hien de thi \n";
+			cout<<"3. Xoa cau hoi\n";
+			cout<<"4. Them cau hoi\n";
+			cout<<"5. Xuat de thi ra file\n";
+			cout<<"0. Thoat chuong trinh\n";
+			cout<<"--------------------------------------\n";
+			cout<<"Nhap lua chon: ";
+			cin>>Case;
+			switch(Case)
+			{
+				case 1:
+				{
+					docFile();
+					Display();
+					system("pause");
+					system("cls");
+					break;
+				}
+				case 2:
+				{
+					Test();
+					system("pause");
+					system("cls");
+					break;
+				}
+				case 3:
+				{
+					Display();
+					XoaCauHoi();
+					Display();
+					system("pause");
+					system("cls");
+					break;
+				}
+				case 4:
+				{
+					Display();
+					ThemCauHoi();
+					Display();
+					system("pause");
+					system("cls");
+					break;
+				}
+				case 5:
+				{
+					xuatfile();
+					system("pause");
+					system("cls");
+					break;
+				}
+				case 0:
+				{
+					exit(0);
+				}
+			}
+		}
 	}	 
 };
+
 int main()
 {
 	DeThi* dethi= new DeThi;
-	dethi->docFile();
+//	dethi->docFile();
 //	dethi->Display();
 //	dethi->XoaCauHoi();
 //	dethi->ThemCauHoi();
 //	dethi->Display();	
 //	dethi->xuatfile();	
-	dethi->Test();
+//	dethi->Test();
+	dethi->StartMenu();
 }
